@@ -66,6 +66,46 @@ namespace READERS_WRITERS.CLASSES
             }
 
         }
+
+        public bool inizialize(int N_readers,int N_writers)
+        {
+            try
+            {
+                if (N_readers > 0 && N_writers > 0)
+                {
+                    this.Readers = new List<READER>(N_readers);
+                    this.Writers = new List<WRITER>(N_writers);
+                    this.Mutex = new Mutex(true, "Access_to_memory");
+                    this.Db = new Semaphore(1, N_readers, "Control access to database");
+                    for (int i = 0; i < N_readers; i++)
+                    {
+                        this.Readers[i] = new READER();
+                    }
+
+                    for (int i = 0; i < N_writers; i++)
+                    {
+                        this.Writers[i] = new WRITER();
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public void start()
+        {
+            foreach (var item in this.Readers){ item.start_thread(); }
+            foreach (var item in this.Writers) { item.start_thread(); }
+        }
         #endregion
 
     }

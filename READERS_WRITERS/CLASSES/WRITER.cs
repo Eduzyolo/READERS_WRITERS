@@ -38,6 +38,7 @@ namespace READERS_WRITERS.CLASSES
             try
             {
                 byte[] bytes = System.Text.Encoding.UTF8.GetBytes(text);
+                System.IO.File.Create(path_write);
                 System.IO.File.WriteAllBytes(path_write,bytes);
                 return true;
             }

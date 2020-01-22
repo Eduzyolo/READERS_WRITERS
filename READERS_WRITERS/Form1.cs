@@ -19,7 +19,7 @@ namespace READERS_WRITERS
             InitializeComponent();
 
             SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-            synthesizer.Volume = 100;  // 0...100
+            synthesizer.Volume = 0;  // 0...100
             synthesizer.Rate = 0;
 
             byte[] bytes = System.IO.File.ReadAllBytes("./BUFFER/START/Lorem_Ipsum_1P.txt");
